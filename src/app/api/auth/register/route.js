@@ -32,17 +32,21 @@ export async function POST(request, { params }) {
     [nombre, correo, passwordHash, expires_at,codigo],
   );
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error(error);
-      return res.status(500).send("Error al enviar el correo");
-    }
-    console.log("Correo enviado");
-    res.send("exito al registrarse");
-  });
+  try {
+  await transporter.sendMail(mailOptions);
 
-  console.log(nuevaUsuario.rows);
+  console.log("Correo enviado");
+
   return NextResponse.json({
-    id: nuevaUsuario.rows[0].id
-});
+    mensaje: "Registro pendiente; correo enviado",
+    id: nuevaUsuario.rows[0].id,
+  });
+} catch (error) {
+  console.error("Error al enviar el correo:", error);
+
+  return NextResponse.json(
+    { error: "No se pudo enviar el correo" },
+    { status: 500 }
+  );
+}
 }

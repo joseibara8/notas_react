@@ -4,42 +4,51 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import "./codigo.css";
 import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 
 export default function Codigo() {
     const router = useRouter();
-
+    const params = useParams();
+    const id = params.id;
     const [codigo_recivido, setcodigo_recivido] = useState("");
     const [usuario, setUsuario] = useState(null);
 
     useEffect(() => {
-        async function LoadUser() {
-            try {
-                const res = await fetch("/api/auth/register");
+  console.log("EL USEEFFECT SE EJECUTÓ");
 
-                if (!res.ok) {
-                    console.error("Error al cargar el usuario");
-                    return;
-                }
+  async function LoadUser() {
+    console.log("ENTRÉ A LOADUSER");
 
-                const data = await res.json();
-                setUsuario(data);
-            } catch (error) {
-                console.error("Error en la petición:", error);
-            }
-        }
+    try {
+      const res = await fetch(`/api/auth/codigo/${id}`);
+        
+        
+      const data = await res.json();
+      setUsuario(data);
+      console.log("ID recibido:", id);
+        console.log("Respuesta de la API:", data);
+    } catch (error) {
+      console.error("ERROR EN LOADUSER:", error);
+    }
+  }
 
-        LoadUser();
-    }, []);
+  LoadUser();
+}, [id]);
 
     function onSubmit(e) {
-        e.preventDefault();
+  e.preventDefault();
+ if (!usuario) {
+    console.log("El usuario todavía no está cargado");
+    return;
+  }
 
-    console.log("Botón presionado");
-    console.log("Usuario:", usuario);
-    console.log("Código ingresado:", codigo_recivido);
+  if (usuario[0].codigo != codigo_recivido) {
+    console.log("Los códigos no coinciden");
+    return;
+  }
 
-    router.push("/login");
-    }
+  router.push("/login")
+}
 
     return (
         <main className="codigo-contenedor">

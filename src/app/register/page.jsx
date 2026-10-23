@@ -31,7 +31,7 @@ const router = useRouter();
     }
 
     const data = await res.json();
-    console.log(data + "si");
+
 
     setNombre("");
     setCorreo("");
