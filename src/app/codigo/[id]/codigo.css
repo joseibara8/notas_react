@@ -76,6 +76,7 @@ body {
 .codigo-boton:hover {
   background-color: #ffec81;
   transform: translateY(-1px);
+  color: #222;
 }
 
 .codigo-enlace {

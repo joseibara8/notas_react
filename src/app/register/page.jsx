@@ -31,12 +31,13 @@ const router = useRouter();
     }
 
     const data = await res.json();
-    console.log(data);
+    console.log(data + "si");
 
     setNombre("");
     setCorreo("");
     setContraseña("");
-    router.refresh();
+    
+    router.push(`/codigo/${data.id}`);
   }
 
 return (

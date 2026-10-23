@@ -10,8 +10,6 @@ export default function New() {
   const router = useRouter();
 
 
-  
-  /*---------------GET-------------*/ 
   async function onSubmit(e) {
     e.preventDefault();
 
