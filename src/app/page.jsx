@@ -1,35 +1,45 @@
 import "./page.css";
 import TaskCard from "@/components/TaskCard";
 import New from "@/components/new";
-async function LoadTask() {
-  const res = await fetch("http://localhost:3000/api/notas");
-  const data = await res.json();
 
-  return data;
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { getIronSession } from "iron-session";
+import { sessionOptions } from "@/libs/session";
+import { pool } from "@/libs/db";
+
+async function LoadTask() {
+  const session = await getIronSession(
+    await cookies(),
+    sessionOptions
+  );
+
+  if (!session.user?.id) {
+    redirect("/login");
+  }
+
+  const result = await pool.query(
+    "SELECT * FROM notas WHERE usuario_id = $1 ORDER BY id DESC",
+    [session.user.id]
+  );
+
+  return result.rows;
 }
 
-async function HomePage() {
+export default async function HomePage() {
   const tasks = await LoadTask();
-  console.log(JSON.stringify(tasks, null, 2));
 
   return (
     <div>
-      
       <div className="homePage">
-      
-        
-        <New>
-        </New>
+        <New />
+
         <div className="box">
-          
-            {tasks.map((task) => (
-              <TaskCard task={task} key={task.id} />
-            ))}
-            
+          {tasks.map((task) => (
+            <TaskCard task={task} key={task.id} />
+          ))}
         </div>
       </div>
     </div>
   );
 }
-
-export default HomePage;

@@ -35,8 +35,9 @@ export default function Codigo() {
   LoadUser();
 }, [id]);
 
-    function onSubmit(e) {
+    async function onSubmit(e) {
   e.preventDefault();
+  const {nombre,correo,contraseña,id} = usuario[0]
  if (!usuario) {
     console.log("El usuario todavía no está cargado");
     return;
@@ -47,6 +48,25 @@ export default function Codigo() {
     return;
   }
 
+  console.log("los usuarios coiciden ")
+
+  const res = await fetch("/api/auth/codigo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nombre,
+        correo,
+        contraseña,
+        id
+      }),
+    });
+
+    if (!res.ok) {
+      console.error("No se pudo CREAR EL USUARIO");
+      return;
+    }
   router.push("/login")
 }
 

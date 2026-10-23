@@ -1,20 +1,34 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import "./login.css";
 
 export default function Login() {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
+  const router = useRouter();
 
-  function onSubmit(e) {
+ async function onSubmit(e) {
     e.preventDefault();
 
-    // Aquí conectaremos el inicio de sesión con la API después.
-    console.log({
-      correo,
-      contraseña,
+    
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        correo,
+        contraseña,
+      
+      }),
     });
+
+    if (!res.ok) {
+      console.error("No se pudo CREAR EL USUARIO");
+      return;
+    }
+  router.push("/")
   }
 
   return (
@@ -50,7 +64,7 @@ export default function Login() {
           type="contraseña"
           placeholder="Escribe tu contraseña"
           value={contraseña}
-          onChange={(e) => setcontraseña(e.target.value)}
+          onChange={(e) => setContraseña(e.target.value)}
           required
         />
 
