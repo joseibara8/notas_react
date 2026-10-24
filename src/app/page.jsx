@@ -28,6 +28,14 @@ async function LoadTask() {
 
 export default async function HomePage() {
   const tasks = await LoadTask();
+  console.log(
+  "Fechas recibidas en HomePage:",
+  tasks.map((task) => ({
+    id: task.id,
+    titulo: task.titulo,
+    create_time: task.create_time,
+  }))
+);
 
   return (
     <div>
@@ -38,6 +46,7 @@ export default async function HomePage() {
           {tasks.map((task) => (
             <TaskCard task={task} key={task.id} />
           ))}
+          
         </div>
       </div>
     </div>

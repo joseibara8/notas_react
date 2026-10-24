@@ -10,7 +10,8 @@ export default function TaskCard({ task, modoEdicion = false }) {
 
   const [titulo, setTitulo] = useState(task.titulo ?? "");
   const [tarea, setTarea] = useState(task.tarea ?? "");
-
+console.log("Datos de la nota:", task);
+console.log("Fecha de creación:", task.create_time);
   const id = task.id;
 
   async function onUpdate(e) {
@@ -74,16 +75,17 @@ export default function TaskCard({ task, modoEdicion = false }) {
           />
 
           <div className="box-botones">
-            <p className="fecha">
-              {task.fecha
-                ? new Date(task.fecha).toLocaleDateString("es-MX", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    timeZone: "UTC",
-                  })
-                : ""}
-            </p>
+            
+<p className="fecha">
+  {task.create_time
+    ? new Date(task.create_time).toLocaleString("es-MX", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        timeZone: "America/Mazatlan",
+      })
+    : ""}
+</p>
 
             <button
               type="button"
@@ -125,15 +127,15 @@ export default function TaskCard({ task, modoEdicion = false }) {
 
         <div className="box-botones">
           <p className="fecha">
-            {task.fecha
-              ? new Date(task.fecha).toLocaleDateString("es-MX", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                  timeZone: "UTC",
-                })
-              : ""}
-          </p>
+  {task.create_time
+    ? new Date(task.create_time).toLocaleString("es-MX", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        timeZone: "America/Mazatlan",
+      })
+    : ""}
+</p>
 
           <button
             type="button"
