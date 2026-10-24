@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -10,8 +9,8 @@ export default function TaskCard({ task, modoEdicion = false }) {
 
   const [titulo, setTitulo] = useState(task.titulo ?? "");
   const [tarea, setTarea] = useState(task.tarea ?? "");
-console.log("Datos de la nota:", task);
-console.log("Fecha de creación:", task.create_time);
+  console.log("Datos de la nota:", task);
+  console.log("Fecha de creación:", task.create_time);
   const id = task.id;
 
   async function onUpdate(e) {
@@ -53,7 +52,6 @@ console.log("Fecha de creación:", task.create_time);
     router.refresh();
   }
 
- 
   // MODO EDICIÓN
   if (modoEdicion) {
     return (
@@ -75,17 +73,16 @@ console.log("Fecha de creación:", task.create_time);
           />
 
           <div className="box-botones">
-            
-<p className="fecha">
-  {task.create_time
-    ? new Date(task.create_time).toLocaleString("es-MX", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        timeZone: "America/Mazatlan",
-      })
-    : ""}
-</p>
+            <p className="fecha">
+              {task.create_time
+                ? new Date(task.create_time).toLocaleString("es-MX", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    timeZone: "America/Mazatlan",
+                  })
+                : ""}
+            </p>
 
             <button
               type="button"
@@ -95,9 +92,7 @@ console.log("Fecha de creación:", task.create_time);
               Cancelar
             </button>
 
-            <button type="submit"
-             className="eliminar"
-             onClick={onUpdate}>
+            <button type="submit" className="eliminar" onClick={onUpdate}>
               Guardar
             </button>
           </div>
@@ -105,7 +100,6 @@ console.log("Fecha de creación:", task.create_time);
       </form>
     );
   }
-
 
   // MODO NORMAL
   return (
@@ -119,23 +113,19 @@ console.log("Fecha de creación:", task.create_time);
           readOnly
         />
 
-        <textarea
-          className="tarea"
-          value={task.tarea ?? ""}
-          readOnly
-        />
+        <textarea className="tarea" value={task.tarea ?? ""} readOnly />
 
         <div className="box-botones">
           <p className="fecha">
-  {task.create_time
-    ? new Date(task.create_time).toLocaleString("es-MX", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        timeZone: "America/Mazatlan",
-      })
-    : ""}
-</p>
+            {task.create_time
+              ? new Date(task.create_time).toLocaleString("es-MX", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  timeZone: "America/Mazatlan",
+                })
+              : ""}
+          </p>
 
           <button
             type="button"
@@ -145,11 +135,7 @@ console.log("Fecha de creación:", task.create_time);
             Actualizar
           </button>
 
-          <button
-            type="button"
-            className="eliminar"
-            onClick={onDelete}
-          >
+          <button type="button" className="eliminar" onClick={onDelete}>
             Eliminar
           </button>
         </div>

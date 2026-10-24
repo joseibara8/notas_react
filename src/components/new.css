@@ -71,3 +71,9 @@ translate: y;
     outline-color: black;
 }
 
+@media (max-width: 600px) {
+  .formulario {
+    width: 95%;
+    box-sizing: border-box;
+  }
+}

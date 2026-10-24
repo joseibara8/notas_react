@@ -4,9 +4,10 @@ background-color: #f3f2f0;
  }
  
  .caja{
-    border: 0px solid #ccc;
+    border: 0px solid #3880ff;
     margin-top: 20px    ;
     min-height: auto;
+    
 ;
 
 }
@@ -83,7 +84,7 @@ padding-right:5px;width: 100px;
     margin: 10px;
     flex: 0 0 30%;
     text-align: center;
-    color: red;
+    color: black;
     
 }
 
@@ -134,4 +135,29 @@ color: #3880ff;
   box-shadow: 0 2px 6px rgba(56, 128, 255, 0.12);
   color: white;
   transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .task {
+    width: 95%;
+    box-sizing: border-box;
+  }
+  .box-botones{
+    display: flex;
+    width: 90%;
+    gap: 8px;
+    margin: auto;
+    min-height:55px;
+    align-items: center;
+    
+
+    .fecha{
+    margin: 0px;
+    flex: 1;
+    text-align: center;
+    color: black;
+    
+}
+
+}
 }
