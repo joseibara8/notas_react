@@ -6,9 +6,9 @@ export default async function TareaEdit({ params }) {
   
   const { id } = await params;
 
-  const res = await fetch(
-    `http://localhost:3000/api/notas/${id}`
-  );
+  
+    const res = await fetch(`/api/notas/${id}`);
+  
 
   if (!res.ok) {
     return <h1>Error al cargar la nota</h1>;
