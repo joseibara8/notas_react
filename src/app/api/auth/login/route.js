@@ -7,6 +7,9 @@ import { sessionOptions } from "@/libs/session";
 
 export async function POST(request) {
   try {
+    NextResponse.json({
+      mensaje: " redirigiendo...",
+    });
     const { correo, contraseña } = await request.json();
 
     const resultado_correo = await pool.query(
@@ -16,7 +19,7 @@ export async function POST(request) {
 
     if (resultado_correo.rows.length === 0) {
       return NextResponse.json(
-        { error: "Correo o contraseña incorrectos" },
+        { error_correo: "*este correo no esta registrado*" },
         { status: 401 },
       );
     }
@@ -27,7 +30,7 @@ export async function POST(request) {
 
     if (!coincide) {
       return NextResponse.json(
-        { error: "Correo o contraseña incorrectos" },
+        { error_contraseña: "contraseña incorrecta" },
         { status: 401 },
       );
     }
@@ -41,9 +44,10 @@ export async function POST(request) {
     await session.save();
 
     return NextResponse.json({
-      mensaje: "Inicio de sesión correcto",
+      mensaje: "exito redirigiendo...",
       id: usuario.id,
     });
+
   } catch (error) {
     console.error("Error en login:", error);
 
