@@ -42,6 +42,11 @@ body {
   margin-bottom: 5px;
   font-size: 14px;
 }
+.mensaje-error{
+  color: #d93025;
+  font-size: 14px;
+  margin-top: 10px;
+}
 
 .registro-input {
   width: 100%;

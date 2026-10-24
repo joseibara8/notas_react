@@ -86,16 +86,12 @@ body {
 .login-enlace a:hover {
   text-decoration: underline;
 }
-.mensaje-error {
+.mensaje-error,.mensaje-error1 {
   color: #d93025;
   font-size: 14px;
   margin-top: 10px;
 }
-.mensaje-error1 {
-  color: #d93025;
-  font-size: 14px;
-  margin-top: 10px;
-}
+
 .mensaje-exito{
   color: #31d925;
   font-size: 14px;

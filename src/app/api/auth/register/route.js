@@ -13,9 +13,40 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function POST(request, { params }) {
-  const { nombre, correo, contraseña } = await request.json();
+  const { nombre, correo, contraseña,confirmarcontraseña } = await request.json();
+  if (nombre == "") {
+      return NextResponse.json(
+        { nombre_vacio: "*nombre vacio*" },
+        { status: 401 },
+      )
+      
+    }
+    if (correo == "") {
+      return NextResponse.json(
+        { correo_vacio: "*correo vacio*" },
+        { status: 401 },
+      )
+    }
+    if (contraseña == "") {
+      return NextResponse.json(
+        { contraseña_vacia: "*contraseña vacio*" },
+        { status: 401 },
+      )
+    }
+    if (confirmarcontraseña == "") {
+      return NextResponse.json(
+        { contraseña2_vacia: "*contraseña de confirmacion vacia*" },
+        { status: 401 },
+      )
+    }
+    if (confirmarcontraseña != contraseña) {
+      return NextResponse.json(
+        { contraseñas_diferentes: "*las contraseñas no coiciden*" },
+        { status: 401 },
+      )
+    }
   if (!emailRegex.test(correo)) {
-    return Response.json({ error: "Correo inválido" }, { status: 400 });
+    return Response.json({ correo_invalido: "Correo inválido" }, { status: 400 });
   }
 
   const codigo = Math.floor(100000 + Math.random() * 900000);
