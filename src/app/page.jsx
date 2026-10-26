@@ -1,7 +1,7 @@
 import "./page.css";
 import TaskCard from "@/components/TaskCard";
 import New from "@/components/new";
-
+import Navbar from "@/components/Navbar";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getIronSession } from "iron-session";
@@ -39,6 +39,7 @@ export default async function HomePage() {
 
   return (
     <div>
+      <Navbar></Navbar>
       <div className="homePage">
         <New />
 
