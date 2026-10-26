@@ -7,6 +7,7 @@ export default function Registro() {
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
+  const [mostrarPassword, setMostrarPassword] = useState(true);
   const [confirmarcontraseña, setConfirmarcontraseña] = useState("");
   const [nombre_vacio, setNombre_vacio] = useState("");
   const [correo_vacio, setCorreo_vacio] = useState("");
@@ -117,14 +118,30 @@ export default function Registro() {
         <label className="registro-label" htmlFor="contraseña">
           Contraseña
         </label>
+        
+        <div className="contenedor_contraseña">
         <input
           className="registro-input"
           id="contraseña"
-          type="contraseña"
+          type={mostrarPassword ? "text" : "password"}
           placeholder="Crea una contraseña"
           value={contraseña}
           onChange={(e) => setContraseña(e.target.value)}
         />
+        <button
+          type="button"
+          className="boton-visibility"
+          onClick={() => setMostrarPassword(!mostrarPassword)}
+          aria-label={
+            mostrarPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+          }
+        >
+          <span className="material-symbols-outlined" aria-hidden="true">
+            {mostrarPassword ? "visibility" : "visibility_off"}
+          </span>
+        </button>
+        </div>
+
         {contraseña_vacia !== "" && (
           <p className="mensaje-error">{contraseña_vacia}</p>
         )}
@@ -138,7 +155,7 @@ export default function Registro() {
         <input
           className="registro-input"
           id="confirmarcontraseña"
-          type="contraseña"
+          type={mostrarPassword ? "text" : "password"}
           placeholder="Repite tu contraseña"
           value={confirmarcontraseña}
           onChange={(e) => setConfirmarcontraseña(e.target.value)}

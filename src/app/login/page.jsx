@@ -10,6 +10,7 @@ export default function Login() {
   const [mensaje_correo, setMensaje_correo] = useState("");
   const [mensaje_contraseña, setMensaje_contraseña] = useState("");
   const [mensaje_exito, setMensaje_exito] = useState("");
+  const [mostrarPassword, setMostrarPassword] = useState(true);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -32,20 +33,17 @@ export default function Login() {
     if (!res.ok) {
       if (data.error_correo) {
         setMensaje_correo(data.error_correo);
-        mensaje_exito("")
+        mensaje_exito("");
         return;
       }
       if (data.error_contraseña) {
         setMensaje_contraseña(data.error_contraseña);
-        mensaje_exito("")
+        mensaje_exito("");
         return;
       }
     }
-    
 
-
-  router.push("/");
-
+    router.push("/");
   }
 
   return (
@@ -76,15 +74,30 @@ export default function Login() {
           Contraseña
         </label>
 
+        <div className="contenedor_contraseña">
         <input
           className="login-input"
           id="contraseña"
-          type="contraseña"
+          type={mostrarPassword ? "text" : "password"}
           placeholder="Escribe tu contraseña"
           value={contraseña}
           onChange={(e) => setContraseña(e.target.value)}
           required
         />
+        <button
+          type="button"
+          className="boton-visibility"
+          onClick={() => setMostrarPassword(!mostrarPassword)}
+          aria-label={
+            mostrarPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+          }
+        >
+          <span className="material-symbols-outlined" aria-hidden="true">
+            {mostrarPassword ? "visibility" : "visibility_off"}
+          </span>
+        </button>
+        </div>
+
         {mensaje_contraseña !== "" && (
           <p className="mensaje-error1">{mensaje_contraseña}</p>
         )}

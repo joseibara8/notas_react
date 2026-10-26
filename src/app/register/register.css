@@ -94,6 +94,33 @@ body {
 .registro-enlace a:hover {
   text-decoration: underline;
 }
+.boton-visibility {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+  color: #555;
+}
+.contenedor_contraseña {
+  position: relative;
+  width: 100%;
+}
+.boton-visibility:hover {
+  color: #111;
+}
+
+.material-symbols-outlined {
+  font-size: 22px;
+}
 
 @media (max-width: 480px) {
   .registro-formulario {
